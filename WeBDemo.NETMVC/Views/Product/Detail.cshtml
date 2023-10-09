@@ -5,8 +5,88 @@
 
 
 
-<h2>
-    Detail
-    @Model.Name
-</h2>
+<header>
+    <link href="~/Content/css/styles1.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.Id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+
+</header>
+<section>
+    <ul class="breadcrumb">
+        <li>
+            <a href="/laptop">Laptop</a>
+            <meta property="position" content="1">
+        </li>
+        <li>
+
+            <a href="/laptop-acer">Laptop Acer</a>
+            <meta property="position" content="2">
+        </li>
+    </ul>
+    <h1 class="titleh1">@Model.Name</h1>
+
+    <div class="box_main">
+
+        <div class="box_left">
+
+            <div class="item-img">
+                <img src="~/Content/images/@Model.Avatar" class=" lazyloaded"
+                     alt="iPhone 11 64GB" width="210" height="210" />
+            </div>
+
+
+        </div>
+
+        <div class="box-right">
+            <div class="form-row  mt-4">
+                <div class="form-group col-md flex-grow-0">
+                    <div class="input-group mb-3 input-spinner">
+                        <input type="text" id="ipQuantity" class="form-control" value="1">
+                    </div>
+                </div> 
+                <div class="form-group col-md">
+                    <a href="#" id="addtocart" class="btn  btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="text" h>Thêm vào giỏ hàng</span>
+                    </a>
+                </div> 
+            </div>
+        </div>
+
+        
+
+    </div>
+
+
+</section>
+
+
+
+
 

@@ -159,11 +159,13 @@
     <Compile Include="Context\User.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2069,6 +2071,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\styles1.css" />
     <Content Include="Content\images\0a0b3d8406e211ac580e8dd370ee7a99.jpg" />
     <Content Include="Content\images\1-340x340.jpg" />
     <Content Include="Content\images\11th-gen-core-i5-processors-badge-rwd.png.rendition.intel.web.550.550.jpg" />
@@ -2277,6 +2280,9 @@
     </Content>
     <Content Include="Areas\Admin\Views\AdProduct\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdProduct\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2304,6 +2310,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

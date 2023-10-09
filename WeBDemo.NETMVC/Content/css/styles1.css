@@ -1,0 +1,26 @@
+﻿.titleh1 {
+    font-weight: bold;
+    display: inline-block;
+    font-size: large;
+}
+.box_main {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+    overflow: hidden;
+    margin-top: 15px;
+    clear: both;
+}
+.box_left {
+    width: calc(100% - 490px);
+    float: left;
+    position:relative;
+}
+
+
+
+.box_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -77,11 +77,26 @@
                     </button>
                     <div id="search-result" style="display: none;"></div>
                 </form>
-                <a href="/cart" class="header__cart menu-info">
+                <a href="@Url.Action("Index","Cart")" class="header__cart menu-info">
                     <i class="icon-cart"></i>
                     <span>Giỏ hàng</span>
                 </a>
                 <a href="/lich-su-mua-hang" class="header__history">Lịch sử đơn hàng</a>
+                <div class="bordercol"></div>
+                <div>
+                    <ul>
+                        @if (Session["idUser"] != null)
+                        {
+                            <li><a href="~/Admin/Product/Index">Trang quản trị</a></li>
+                            <li><a href="~/Home/Logout" class="btn btn-warning">Đăng xuất</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/Home/Register">Đăng kí</a></li>
+                            <li><a href="~/Home/Login">Đăng nhập</a></li>
+                        }
+                    </ul>
+                </div>
                 <div class="bordercol"></div>
                 <a style="padding: 0 !important;" href="javascript:void(0)" class="header__hot">
                 </a>

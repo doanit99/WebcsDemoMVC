@@ -19,6 +19,7 @@ namespace WeBDemo.NETMVC.Areas.Admin.Controllers
 
 			return View(lstProduct);
         }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -60,6 +61,58 @@ namespace WeBDemo.NETMVC.Areas.Admin.Controllers
 
 			// Nếu có lỗi, hiển thị trang Create lại với thông báo lỗi
 			return View(model);
+		}
+
+
+		[HttpGet]
+		public ActionResult Details(int id)
+		{
+			var objProduct = obj.Products.Where(n=>n.Id == id).FirstOrDefault();
+			return View(objProduct);
+		}
+
+		[HttpGet]
+		public ActionResult Delete(int id)
+		{
+			var objProduct = obj.Products.Where(n => n.Id == id).FirstOrDefault();
+			return View(objProduct);
+		}
+
+		[HttpPost]
+		public ActionResult Delete(Product objPro)
+		{
+			var objProduct = obj.Products.Where(n => n.Id == objPro.Id).FirstOrDefault();
+			obj.Products.Remove(objProduct);
+			obj.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+
+		[HttpGet]
+		public ActionResult Edit(int id)
+		{
+			var objProduct = obj.Products.Where(n => n.Id == id).FirstOrDefault();
+			return View(objProduct);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(Product objProduct)
+		{
+			// Kiểm tra xem có tệp tin hình ảnh được tải lên không
+			if (objProduct.ImageUpload != null)
+			{
+				string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
+				string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
+				fileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + extension;
+				objProduct.Avatar = fileName;
+
+				// Lưu trữ tệp tin hình ảnh vào thư mục
+				var imagePath = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+				objProduct.ImageUpload.SaveAs(imagePath);
+			}
+			obj.Entry(objProduct).State = System.Data.Entity.EntityState.Modified;
+			obj.SaveChanges();
+			return RedirectToAction("Index");
 		}
 	}
 }
