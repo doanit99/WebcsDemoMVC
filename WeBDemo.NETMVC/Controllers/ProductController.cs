@@ -10,7 +10,7 @@ namespace WeBDemo.NETMVC.Controllers
 {
     public class ProductController : Controller
     {
-		private WebCSEntities1 objWebCSEntities1 = new WebCSEntities1();
+		private WebCSEntities2 objWebCSEntities1 = new WebCSEntities2();
 
 		// GET: Product
 		public ActionResult Detail(int Id)

@@ -10,10 +10,10 @@ namespace WeBDemo.NETMVC.Areas.Admin.Controllers
 {
     public class AdProductController : Controller
     {
-		WebCSEntities1 obj = new WebCSEntities1();
+		WebCSEntities2 obj = new WebCSEntities2();
 
 		// GET: Admin/AdProduct
-		public ActionResult Index()
+		public ActionResult Index()	
         {
             var lstProduct = obj.Products.ToList();
 

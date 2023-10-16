@@ -10,7 +10,7 @@ namespace WeBDemo.NETMVC.Controllers
 {
     public class CartController : Controller
     {
-		WebCSEntities1 objWebsiteBanHangEntities = new WebCSEntities1();
+		WebCSEntities2 objWebsiteBanHangEntities = new WebCSEntities2();
 		// GET: Cart
 		public ActionResult Index()
         {

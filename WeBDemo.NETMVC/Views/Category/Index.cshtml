@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sản phẩm theo danh mục</h2>
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <li>@product.Name - Giá: @product.Price</li>
+    }
+</ul>
+

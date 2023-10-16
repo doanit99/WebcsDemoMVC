@@ -69,34 +69,42 @@
                     <span data-province="3" data-district="0" data-ward="0">Hồ Chí Minh</span>
                 </a>
 
-                <form action="/tim-kiem" onsubmit="return suggestSearch(event);" class="header__search">
-                    <input id="skw" type="text" class="input-search" onkeyup="suggestSearch(event);"
-                           placeholder="Bạn tìm gì..." name="key" autocomplete="off" maxlength="100">
-                    <button type="submit">
-                        <i class="icon-search"></i>
-                    </button>
-                    <div id="search-result" style="display: none;"></div>
-                </form>
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                {
+                    <input type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm" class="input-search" />
+                    <input type="submit" value="Tìm kiếm" />
+                }
+
                 <a href="@Url.Action("Index","Cart")" class="header__cart menu-info">
                     <i class="icon-cart"></i>
                     <span>Giỏ hàng</span>
                 </a>
                 <a href="/lich-su-mua-hang" class="header__history">Lịch sử đơn hàng</a>
                 <div class="bordercol"></div>
-                <div>
-                    <ul>
-                        @if (Session["idUser"] != null)
-                        {
-                            <li><a href="~/Admin/Product/Index">Trang quản trị</a></li>
-                            <li><a href="~/Home/Logout" class="btn btn-warning">Đăng xuất</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="~/Home/Register">Đăng kí</a></li>
-                            <li><a href="~/Home/Login">Đăng nhập</a></li>
-                        }
-                    </ul>
-                </div>
+
+
+                @if (Session["idUser"] != null)
+                {
+                    <div style="text-align:center">
+                        <a class="header__history" href="~/Admin/Product/Index">Trang quản trị</a>
+                    </div>
+                    <div class="bordercol"></div>
+                    <div style="text-align:center">
+                        <a class="header__history" href="~/Home/Logout">Đăng xuất</a>
+                    </div>
+                }
+                else
+                {
+                    <div style="text-align:center">
+                        <a class="header__history" href="~/Home/Register">Đăng kí</a>
+                    </div>
+                    <div class="bordercol"></div>
+                    <div style="text-align:center">
+                        <a class="header__history" href="~/Home/Login">Đăng nhập</a>
+                    </div>
+                }
+
+
                 <div class="bordercol"></div>
                 <a style="padding: 0 !important;" href="javascript:void(0)" class="header__hot">
                 </a>
@@ -115,7 +123,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+                </div>
 
         <div class="header__main">
             <div>

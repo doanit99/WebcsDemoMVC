@@ -13,10 +13,10 @@ namespace WeBDemo.NETMVC.Context
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WebCSEntities1 : DbContext
+    public partial class WebCSEntities2 : DbContext
     {
-        public WebCSEntities1()
-            : base("name=WebCSEntities1")
+        public WebCSEntities2()
+            : base("name=WebCSEntities2")
         {
         }
     
@@ -27,6 +27,8 @@ namespace WeBDemo.NETMVC.Context
     
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

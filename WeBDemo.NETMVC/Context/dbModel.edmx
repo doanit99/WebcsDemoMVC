@@ -33,16 +33,25 @@
           <Property Name="CreateOnUtc" Type="datetime" />
           <Property Name="UpdateOnUtc" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Order">
-          <Property Name="Id" Type="int" />
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="ProductId" Type="int" />
-          <Property Name="Page" Type="float" />
-          <Property Name="Status" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Status" Type="float" />
           <Property Name="CreatedOnUtc" Type="datetime" />
-        </EntityType>-->
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,6 +72,7 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
           <Property Name="DisplayOrder" Type="int" />
           <Property Name="CreatedOnUtc" Type="datetime" />
           <Property Name="UpdateOnUtc" Type="datetime" />
+          <Property Name="Quantity" Type="float" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -78,6 +88,8 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
         <EntityContainer Name="WebCSModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -114,6 +126,25 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
           <Property Name="CreateOnUtc" Type="DateTime" Precision="3" />
           <Property Name="UpdateOnUtc" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Status" Type="Double" />
+          <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -134,6 +165,7 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
           <Property Name="DisplayOrder" Type="Int32" />
           <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
           <Property Name="UpdateOnUtc" Type="DateTime" Precision="3" />
+          <Property Name="Quantity" Type="Double" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -146,9 +178,11 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsAdmin" Type="Boolean" />
         </EntityType>
-        <EntityContainer Name="WebCSEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WebCSEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Brands" EntityType="Self.Brand" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
@@ -157,7 +191,7 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WebCSModelStoreContainer" CdmEntityContainer="WebCSEntities1">
+        <EntityContainerMapping StorageEntityContainer="WebCSModelStoreContainer" CdmEntityContainer="WebCSEntities2">
           <EntitySetMapping Name="Brands">
             <EntityTypeMapping TypeName="WebCSModel.Brand">
               <MappingFragment StoreEntitySet="Brand">
@@ -188,6 +222,27 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="WebCSModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="WebCSModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="WebCSModel.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -207,6 +262,7 @@ warning 6013: The table/view 'WebCS.dbo.Order' does not have a primary key defin
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
                 <ScalarProperty Name="UpdateOnUtc" ColumnName="UpdateOnUtc" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

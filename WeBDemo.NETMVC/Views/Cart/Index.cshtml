@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Index";
 }
+<link href="~/Content/css/styles1.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
 <script type="text/javascript">
     $(function () {
@@ -31,67 +31,70 @@
 </script>
 
 <section class="section">
-    <div class="container">
-        <h2>Giỏ hàng</h2>
-        <div class="row">
-            <main class="col-md-9">
-                <div class="card">
-
-                    <table class="table table-borderless table-shopping-cart">
-                        <thead class="text-muted">
-                            <tr class="small text-uppercase">
-                                <th scope="col">Product</th>
-                                <th scope="col" width="120">Quantity</th>
-                                <th scope="col" width="120">Price</th>
-                                <th scope="col" class="text-right" width="200"> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
-                            {
-                                foreach (var item in Model)
-                                {
-                                    <tr id="product-@item.Product.Id">
-                                        <td>
-                                            <figure class="itemside">
-                                                <div class="aside"><img src="~/Content/images/items/@item.Product.Avatar" class="img-sm"></div>
-                                                <figcaption class="info">
-                                                    <a href="#" class="title text-dark">@item.Product.Name</a>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <input type="text" value="@item.Quantity" />
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">@item.Product.Price</var>
-                                            </div> <!-- price-wrap .// -->
-                                        </td>
-                                        <td class="text-right">
-                                            <input type="hidden" value="@item.Product.Id" id="productid" />
-                                            <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-
-                                            <a href="" class="btn btn-light" id="removecart"> Remove</a>
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                            else
-                            {
-                                <p>Không có sản phẩm trong giỏ hàng</p>
-                            }
 
 
-                        </tbody>
-                    </table>
-
-                    <div class="card-body border-top">
-                        <a href="#" class="btn btn-primary float-md-right"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
-                        <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
-                    </div>
+    <div class="row">
+        <main class="col-md-9">
+            <div class="card1">
+                <div class="card-header1">
+                    Shopping Cart
                 </div>
-            </main>
-        </div>
+                <table class="table table-borderless table-shopping-cart">
+                    <thead class="text-muted">
+                        <tr class="small text-uppercase">
+                            <th scope="col">Product</th>
+                            <th scope="col" width="120">Quantity</th>
+                            <th scope="col" width="120">Price</th>
+                            <th scope="col" class="text-right" width="200">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr id="product-@item.Product.Id">
+                                    <td>
+                                        <figure class="itemside">
+                                            <div class="aside"><img src="~/Content/images/@item.Product.Avatar" class="img-sm"></div>
+                                            <figcaption class="info">
+                                                <a href="#" class="title text-dark">@item.Product.Name</a>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td>
+                                        <input type="text" value="@item.Quantity"/>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">@item.Product.Price</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+
+                                    <td class="text-right">
+                                        <input type="hidden" value="@item.Product.Id" id="productid" />
+                                        <a href="" class="btn btn-light" id="removecart"> Remove</a>
+                                    </td>
+                                </tr>
+                                
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có sản phẩm trong giỏ hàng</p>
+                        }
+
+
+                    </tbody>
+
+                </table>
+                
+                <div class="card-body border-top">
+                    <a href="@Url.Action("Index","Payment")" class="btn btn-primary1 float-md-right"> Thanh toán <i class="fa fa-chevron-right"></i> </a>
+                    <a href="@Url.Action("Index","Home")" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua hàng </a>
+                </div>
+            </div>
+        </main>
+        <main class="col-md-3"></main>
     </div>
-    </section>
+</section>

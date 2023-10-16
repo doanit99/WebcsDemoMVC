@@ -153,6 +153,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\Order.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\OrderDetail.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Product.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -160,8 +166,11 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2271,6 +2280,11 @@
     <Content Include="Content\Admin\plugins\summernote\summernote.js.map" />
     <Content Include="Content\Admin\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\Admin\plugins\toastr\toastr.js.map" />
+    <Content Include="Areas\Admin\Views\AdProduct\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\Edit.cshtml" />
     <EntityDeploy Include="Context\dbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>dbModel.Designer.cs</LastGenOutput>
@@ -2278,11 +2292,6 @@
     <Content Include="Context\dbModel.edmx.diagram">
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\AdProduct\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\AdProduct\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AdProduct\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\AdProduct\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AdProduct\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2313,6 +2322,9 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
